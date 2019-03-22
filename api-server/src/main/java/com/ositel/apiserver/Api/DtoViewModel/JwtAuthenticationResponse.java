@@ -1,4 +1,4 @@
-package com.ositel.apiserver.Api.payload;
+package com.ositel.apiserver.Api.DtoViewModel;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

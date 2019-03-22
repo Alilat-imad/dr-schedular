@@ -1,9 +1,9 @@
 package com.ositel.apiserver.Api;
 
-import com.ositel.apiserver.Api.payload.ApiResponse;
-import com.ositel.apiserver.Api.payload.JwtAuthenticationResponse;
-import com.ositel.apiserver.Api.payload.SignInRequest;
-import com.ositel.apiserver.Api.payload.SignUpRequest;
+import com.ositel.apiserver.Api.DtoViewModel.ApiResponse;
+import com.ositel.apiserver.Api.DtoViewModel.JwtAuthenticationResponse;
+import com.ositel.apiserver.Api.DtoViewModel.SignInRequest;
+import com.ositel.apiserver.Api.DtoViewModel.SignUpRequest;
 import com.ositel.apiserver.db.RoleRepository;
 import com.ositel.apiserver.db.UserRepository;
 import com.ositel.apiserver.exception.AppException;

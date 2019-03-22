@@ -1,0 +1,21 @@
+# Sign In
+POST {{host-url}}/auth/signin
+Content-Type: application/json
+
+{
+  "usernameOrEmail": "ialilat",
+  "password": "2000io1w"
+}
+###
+
+# Sign Up
+POST {{host-url}}/auth/signup
+Content-Type: application/json
+
+{
+    "name": "alilat"
+  , "username": "ialilat"
+  , "email": "alilat.imad@gmail.com"
+  , "password": "2000io1w"
+}
+###

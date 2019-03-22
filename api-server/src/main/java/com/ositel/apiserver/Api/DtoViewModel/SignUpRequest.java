@@ -1,4 +1,4 @@
-package com.ositel.apiserver.Api.payload;
+package com.ositel.apiserver.Api.DtoViewModel;
 
 import org.hibernate.annotations.NaturalId;
 

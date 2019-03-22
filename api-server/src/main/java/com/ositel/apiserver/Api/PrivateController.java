@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PrivateController {
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('MEDECIN')")
     @GetMapping("/private")
     public ResponseEntity<?> getPrivateDate(){
         ArrayList<String> strings = new ArrayList<>();
