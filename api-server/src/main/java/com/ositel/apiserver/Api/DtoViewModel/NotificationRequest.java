@@ -8,9 +8,13 @@ import java.util.Date;
 @Getter
 public class NotificationRequest {
     // TODO: add in repository : findByID !
+
     @NotBlank
-    private Long userId;
+    private String patientName;
+    @NotBlank
+    private String medecinMail;
     @NotBlank
     private Date appointement;
+
 
 }

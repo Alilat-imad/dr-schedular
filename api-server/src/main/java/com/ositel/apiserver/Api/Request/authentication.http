@@ -13,9 +13,12 @@ POST {{host-url}}/auth/signup
 Content-Type: application/json
 
 {
-    "name": "alilat"
-  , "username": "ialilat"
-  , "email": "alilat.imad@gmail.com"
+    "firstName": "Ziouane"
+  , "lastName" : "Imene"
+  , "phone": "+213770474400"
+  , "address" : "Algiers, Algeria"
+  , "username": "iziouane"
+  , "email": "ziouane.imene@gmail.com"
   , "password": "2000io1w"
 }
 ###

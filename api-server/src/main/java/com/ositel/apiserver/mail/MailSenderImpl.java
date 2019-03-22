@@ -5,6 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class MailSenderImpl implements IMailSender {
 
@@ -30,12 +32,12 @@ public class MailSenderImpl implements IMailSender {
     }
 
     @Override
-    public void sendNotificaton(String to, String name, String body) {
+    public void sendNotification(String to, String patientName, Date date) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setFrom("alilat.imad@gmail.com");
-        message.setSubject("Notification from " + name);
-        message.setText(body);
+        message.setSubject("New appointement added.");
+        message.setText("Le patient "+ patientName+ " vient de prendre un rendez-vous pour le : "+date );
         this.mailSender.send(message);
     }
 }

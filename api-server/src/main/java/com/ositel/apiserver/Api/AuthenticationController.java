@@ -4,10 +4,12 @@ import com.ositel.apiserver.Api.DtoViewModel.ApiResponse;
 import com.ositel.apiserver.Api.DtoViewModel.JwtAuthenticationResponse;
 import com.ositel.apiserver.Api.DtoViewModel.SignInRequest;
 import com.ositel.apiserver.Api.DtoViewModel.SignUpRequest;
+import com.ositel.apiserver.db.MedecinRepository;
 import com.ositel.apiserver.db.RoleRepository;
 import com.ositel.apiserver.db.UserRepository;
 import com.ositel.apiserver.exception.AppException;
 import com.ositel.apiserver.exception.BadRequestException;
+import com.ositel.apiserver.model.Medecin;
 import com.ositel.apiserver.model.Role;
 import com.ositel.apiserver.model.RoleName;
 import com.ositel.apiserver.model.User;
@@ -42,6 +44,8 @@ public class AuthenticationController {
     @Autowired
     RoleRepository roleRepository;
     @Autowired
+    MedecinRepository medecinRepository;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/signin")
@@ -73,8 +77,8 @@ public class AuthenticationController {
                     HttpStatus.BAD_REQUEST);
         }
         // Create user's account
-        User user = new User(signUpRequest.getName()
-                        , signUpRequest.getUsername()
+        User user = new User(
+                          signUpRequest.getUsername()
                         , signUpRequest.getEmail()
                         , signUpRequest.getPassword()
                         );
@@ -114,7 +118,17 @@ public class AuthenticationController {
 
         user.setRoles(Collections.singleton(userRole));
 
+        Medecin medecin = new Medecin(signUpRequest.getFirstName(), signUpRequest.getLastName(),signUpRequest.getPhone(),
+                signUpRequest.getAddress(), user);
+
+        user.setMedecin(medecin);
+
         User result = userRepository.save(user);
+        this.medecinRepository.save(medecin);
+
+
+
+
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
