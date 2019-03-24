@@ -77,6 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             , "/**/*.gif"
                             , "/**/*.svg"
                             , "/**/*.jpg"
+                            , "/**/*.ttf"
+                            , "/**/*.woff"
+                            , "/**/*.woff2"
                             , "/**/*.html"
                             , "/**/*.css"
                             , "/**/*.js")
@@ -87,9 +90,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             .permitAll()
                     .antMatchers("/api/public")
                             .permitAll()
-                    .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
+                    .antMatchers("/api/appointment/**")
                             .permitAll()
-                    .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**")
+                    .antMatchers("/api/mailing/**")
+                            .permitAll()
+
+                .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
+                            .permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/medecin/**", "/api/users/**")
                             .permitAll()
                     .anyRequest()
                             .authenticated();

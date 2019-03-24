@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="well-block">
+            <div class="well-title">
+                <h3>Questions ? Book an Appointment</h3>
+            </div>
+            <div *ngIf="popupResult" class="alert alert-success" role="alert">
+                    {{popupMessage}}
+            </div> 
+            <div *ngIf="popupResult == false" class="alert alert-danger" role="alert">
+                    {{popupMessage}}
+            </div>
+            <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && sendAppointment()" novalidate class="feedback-form">
+                
+                <!-- Form start -->
+                <div class="row">
+                    <!-- Select Doctor -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label" for="appointmentfor">Medecin</label>
+                            <!-- <select [(ngModel)]="appointmentData.medecinId" id="appointmentfor" name="appointmentfor" class="form-control"> -->
+                            <!-- <select required #medecin="ngModel" ngModel (change)="validateMedecinSelect(medecin.value)" [class.is-invalid]="medecin.invalid && medecin.touched" id="medecin" name="medecin" class="form-control">
+                                <option value="" disabled>Merci de choisir un medecin</option>
+                            </select> -->
+                            <select id="medecin" 
+                                    name="medecin" 
+                                    class="form-control" 
+                                    [(ngModel)]="appointmentData.medecinId"
+                                    #medecin="ngModel"
+                                    required
+                                    >
+                                    <option value="" disabled>Merci de choisir un medecin</option>
+                                    <option value="1">ALILAT Imad</option>
+                                    <!-- <option *ngFor="let medecin of medecins" [value]=medecin.id>{{medecin.name}}</option> -->
+                            </select>
+
+                            <div *ngIf="f.submitted && medecin.touched && medecin.invalid" class="invalid-input">
+                                test
+                                    <!-- <div *ngIf="date.errors?.required" style="color: red">Champ obligatoire</div> -->
+                                    <!-- <div *ngIf="date.errors?.minlength" style="color: red">Champ obligatoire</div> -->
+                            </div>
+
+                            <!-- input validation group -->
+                            <small class="text-danger" [class.d-none]="f.submitted || (medecin.valid || medecin.touched)">Merci de choisir un medecin</small>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="date">Preferred Date</label>
+                            <!-- Full name -->
+                            <input type="date" 
+                                        id="date" 
+                                        class="fadeIn second form-control input-md"
+                                        name="name"
+                                        placeholder="Preferred Date"
+                                        [(ngModel)]="appointmentData.date" 
+                                        #date="ngModel"
+                                        [class.is-invalid]="date.invalid && date.touched"
+                                        
+                                        required>
+                                        <!-- [ngClass]="{ 'is-invalid': f.submitted && date.invalid}" -->
+                                        <!-- input validation group -->
+                                        <!-- <div *ngIf="f.submitted && date.invalid" class="invalid-input">
+                                            <div *ngIf="date.errors?.required" style="color: red">Champ obligatoire</div>
+                                            <div *ngIf="date.errors?.minlength" style="color: red">Champ obligatoire</div>
+                                        </div> -->
+                                        <small class="text-danger" [class.d-none]="date.valid || date.untouched">Merci de choisir une date</small>
+                        </div>
+                    </div>
+                    <!-- Select Basic -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="time">Preferred Time</label>
+                            <select [(ngModel)]="appointmentData.shiftTimeId" #shift="ngModel" id="time" name="time" class="form-control">
+                                <option value="default">Merci de choisir un shift</option>
+                                <!-- <option *ngFor="let item of items">{{item}}</option> -->
+                            </select>
+                            <small [class.d-none]="shift.valid || shift.untouched" class="text-danger">Merci de choisir une plage horaire</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name">Name</label>                            
+                                <!-- Full name -->
+                                <input type="text" 
+                                            id="name" 
+                                            class="fadeIn second form-control input-md"
+                                            name="name"
+                                            placeholder="Nom complet"
+                                            [(ngModel)]="appointmentData.name" 
+                                            #name="ngModel"
+                                            [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
+                                            required>
+    
+                                            <!-- input validation group -->
+                                            
+                                            <div *ngIf="f.submitted && name.invalid" class="invalid-input">
+                                                <!-- individual validation errors -->
+                                                <!-- <div *ngIf="name.errors?.required" style="color: red">Champ obligatoire</div> -->
+                                                <small  *ngIf="name.errors?.required" class="text-danger">Champ obligatoire</small>
+                                            </div>
+    
+                            </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="email">Email</label>
+                                <input type="text"
+                                                id="email"
+                                                class="fadeIn second form-control input-md"
+                                                name="email"
+                                                placeholder="Email"
+                                                [(ngModel)]="appointmentData.email"
+                                                #email="ngModel"
+                                                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                                                required email/>
+                                        <!-- input validation group -->
+                                        <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+                                            <!-- individual validation errors -->
+                                            <small  *ngIf="email.errors?.required" class="text-danger">Champ obligatoire</small>
+                                            <small  *ngIf="email.errors?.email" class="text-danger">Le champ n'est pas un email valide</small>
+                                        </div>
+                            </div>
+                        </div>
+                    {{ appointmentData | json }}
+                    <!-- Button -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <!-- <button id="singlebutton" name="singlebutton" class="btn btn-default">Make An Appointment</button> -->
+                            <button type="submit" class="btn btn-lg btn btn-outline-info btn-block">Prendre rendez-vous →</button>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <!-- form end -->
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="well-block">
+            <div class="well-title">
+                <h2>Pourquoi rendez-vous avec nous?</h2>
+            </div>
+            <div class="feature-block">
+                <div class="feature feature-blurb-text">
+                    <h4 class="feature-title">24/7 heures disponibles</h4>
+                    <div class="feature-content">
+                        <p>Integer nec nisi sed mi hendrerit mattis. Vestibulum mi nunc, ultricies quis vehicula et, iaculis in magnestibulum.</p>
+                    </div>
+                </div>
+                <div class="feature feature-blurb-text">
+                    <h4 class="feature-title">Personnel expérimenté disponible</h4>
+                    <div class="feature-content">
+                        <p>Aliquam sit amet mi eu libero fermentum bibendum pulvinar a turpis. Vestibulum quis feugiat risus. </p>
+                    </div>
+                </div>
+                <div class="feature feature-blurb-text">
+                    <h4 class="feature-title">Prix bas et frais</h4>
+                    <div class="feature-content">
+                        <p>Praesent eu sollicitudin nunc. Cras malesuada vel nisi consequat pretium. Integer auctor elementum nulla suscipit in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

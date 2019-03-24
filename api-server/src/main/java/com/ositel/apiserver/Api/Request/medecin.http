@@ -1,3 +1,28 @@
+# API NOTEBOOK MANAGEMENT
+
+GET {{host-url}}//medecin/all
+
+###
+
+GET {{host-url}}//medecin/appointements/1
+
+###
+
+# API NOTEBOOK MANAGEMENT
+
+GET {{host-url}}//medecin/all
+
+###
+// Get
+GET {{host-url}}//patient/appointements/1
+
+###
+
+
+
+
+
+
 # Sign In
 POST {{host-url}}/auth/signin
 Content-Type: application/json

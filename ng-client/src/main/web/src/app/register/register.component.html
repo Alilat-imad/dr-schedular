@@ -1,0 +1,128 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Sign Up New Doctor </h2>
+      <!-- <h2 class="inactive underlineHover">Sign Up </h2> -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <!-- <i class="fa fa-heartbeat" style="font-size:48px;color:rgb(86, 186, 237)"></i> -->
+      </div>
+      <!-- Login Form -->
+      <div *ngIf="popupResult" class="alert alert-success" role="alert">
+          {{popupMessage}}
+      </div> 
+      <div *ngIf="popupResult == false" class="alert alert-danger" role="alert">
+          {{popupMessage}}
+      </div>
+
+      <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && signupUser()" novalidate class="feedback-form">
+        
+        <!-- Full name -->
+        <input type="text" 
+                          id="fullName" 
+                          class="fadeIn second form-control"
+                          name="fullName"
+                          placeholder="Nom complet"
+                          [(ngModel)]="signupData.fullName" 
+                          #fullName="ngModel"
+                          [ngClass]="{ 'is-invalid': f.submitted && fullName.invalid }"
+                          required>
+  
+                  <!-- input validation group -->
+                  <div *ngIf="f.submitted && fullName.invalid" class="invalid-input">
+                      <!-- individual validation errors -->
+                      <div *ngIf="fullName.errors?.required" style="color: red">Champ obligatoire</div>
+                  </div>
+        <!-- Phone number -->
+        <input type="text" 
+                    id="phone" 
+                    class="fadeIn second form-control"
+                    name="phone"
+                    placeholder="Téléphone"
+                    [(ngModel)]="signupData.phone" 
+                    #phone="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && phone.invalid }"
+                    required>
+  
+              <!-- input validation group -->
+              <div *ngIf="f.submitted && phone.invalid" class="invalid-input">
+                <!-- individual validation errors -->
+                <div *ngIf="phone.errors?.required" style="color: red">Champ obligatoire</div>
+              </div>
+  
+        <!-- Address -->
+        <input type="text" 
+                        id="address" 
+                        class="fadeIn second form-control"
+                        name="address"
+                        placeholder="Addresse"
+                        [(ngModel)]="signupData.address" 
+                        #address="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && address.invalid }"
+                        required>
+  
+              <!-- input validation group -->
+              <div *ngIf="f.submitted && address.invalid" class="invalid-input">
+                <!-- individual validation errors -->
+                <div *ngIf="address.errors?.required" style="color: red">Champ obligatoire</div>
+              </div>
+        
+        <!-- Username -->
+        <input type="text" 
+                id="username" 
+                class="fadeIn second form-control"
+                name="address"
+                placeholder="Username"
+                [(ngModel)]="signupData.username" 
+                #username="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && username.invalid }"
+                required>
+
+                <!-- input validation group -->
+                <div *ngIf="f.submitted && username.invalid" class="invalid-input">
+                <!-- individual validation errors -->
+                <div *ngIf="username.errors?.required" style="color: red">Champ obligatoire</div>
+                </div>
+
+        <!-- Email -->
+        <input type="text"
+                    id="email"
+                    class="fadeIn second form-control"
+                    name="email"
+                    placeholder="Email"
+                    [(ngModel)]="signupData.email"
+                    #email="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                    required email/>
+              <!-- input validation group -->
+              <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+                <!-- individual validation errors -->
+                <div *ngIf="email.errors?.required" style="color: red">Champ obligatoire</div>
+                <div *ngIf="email.errors?.email" style="color: red">Le champ n'est pas un email valide</div>
+              </div>
+        
+        
+          <input type="password"
+                    id="password"
+                    class="fadeIn third form-control"
+                    name="password"
+                    placeholder="votre password"
+                    [(ngModel)]="signupData.password"
+                    #password="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                    required 
+                    minlength="5"/>
+            <!-- input validation group -->
+            <div *ngIf="f.submitted && password.invalid" class="invalid-input">
+                <!-- individual validation errors -->
+                <div *ngIf="password.errors?.required" style="color: red">Champ obligatoire</div>
+                <div *ngIf="password.errors?.minlength">Minimum 5 caractères</div>
+            </div>
+            
+        
+        <input type="submit" class="fadeIn fourth" value="Register">
+      </form>
+  
+    </div>
+  </div>

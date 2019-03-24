@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+        <h2>Feedback</h2>
+        <div *ngIf="popupResult" class="alert alert-success" role="alert">
+            {{popupMessage}}
+        </div> 
+        <div *ngIf="popupResult == false" class="alert alert-danger" role="alert">
+            {{popupMessage}}
+        </div>
+        <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && sendFeedback()" novalidate class="feedback-form">
+
+          <div class="row">
+                <div class="col-sm-6 form-group">
+                  <label for="name">
+                      Votre nom:</label>
+                  <input type="text" 
+                            id="name" 
+                            class="form-control"
+                            name="name"
+                            placeholder="Votre nom"
+                            [(ngModel)]="feedbackData.name" 
+                            #name="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
+                            required>
+
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && name.invalid" class="invalid-input">
+                        <!-- individual validation errors -->
+                        <div *ngIf="name.errors?.required" style="color: red">Champ obligatoire</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="email">
+                        Email:</label>
+                    <input type="text"
+                                id="email"
+                                class="form-control"
+                                name="email"
+                                placeholder="votre email"
+                                [(ngModel)]="feedbackData.email"
+                                #email="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                                required email/>
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+                            <!-- individual validation errors -->
+                            <div *ngIf="email.errors?.required" style="color: red">Champ obligatoire</div>
+                            <div *ngIf="email.errors?.email" style="color: red">Le champ n'est pas un email valide</div>
+                    </div>
+                </div>
+          </div>
+
+          <div class="row">
+              <div class="col-sm-12 form-group">
+                  <label for="comments">
+                      Comments:</label>
+                  <textarea
+                        id="feedback"
+                        class="form-control"
+                        name="feedback"
+                        placeholder="Votre feedback"
+                        rows="6"
+                        [(ngModel)]="feedbackData.feedback"
+                        #feedback="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && feedback.invalid }"
+                        required minlength="10">
+                </textarea>
+
+                <!-- input validation group -->
+                <div *ngIf="f.submitted && feedback.invalid" class="invalid-input">
+                    <!-- individual validation errors -->
+                    <div *ngIf="feedback.errors?.required" style="color: red">Champ obligatoire</div>
+                    <div *ngIf="feedback.errors?.minlength">Minimum 10 caractères</div>
+                </div>
+
+                </div>
+          </div>
+
+
+          <div class="row">
+              <div class="col-sm-12 form-group">
+                  <button type="submit" class="btn btn-lg btn btn-outline-info btn-block">Send →</button>
+              </div>
+          </div>
+
+      </form>
+      <div id="success_message" style="width:100%; height:100%; display:none; ">
+          <h3>Posted your feedback successfully!</h3>
+      </div>
+      <div id="error_message"
+              style="width:100%; height:100%; display:none; ">
+                  <h3>Error</h3>
+                  Sorry there was an error sending your form.
+
+      </div>
+  </div>
+  <div class="col-md-6 col-md-offset-3">
+      <img src="http://www.pngmart.com/files/7/Feedback-PNG-Transparent.png" class="img-fluid rounded mx-auto d-block" alt="Responsive image" width="80%">
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-dark bg-dark mb-5">
+  <a class="navbar-brand" href="/"><i class="fas fa-clinic-medical"></i> Dr Schedular</a>
+
+  <div class="navbar-expand ml-auto navbar-nav">
+      <div class="navbar-expand mr-auto">
+          <div class="navbar-nav">
+            <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active" style="cursor: pointer">Home</a>
+            <a *ngIf=(authservice.isLoggedIn()) class="nav-link" [routerLink]="['/calendar']" routerLinkActive="router-link-active" style="cursor: pointer">Calendar</a>
+            <a class="nav-link" [routerLink]="['/appointment']" routerLinkActive="router-link-active" style="cursor: pointer">Appointment</a>
+            <a class="nav-link" [routerLink]="['/feedback']" routerLinkActive="router-link-active" style="cursor: pointer">Feedback</a>
+            <a *ngIf=(!authservice.isLoggedIn()) class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active" style="cursor: pointer">Login</a>
+            <a *ngIf=(authservice.isLoggedIn()) class="nav-link" [routerLink]="['/register']" routerLinkActive="router-link-active" style="cursor: pointer">Register colleague</a>
+            <a *ngIf=(authservice.isLoggedIn()) class="nav-link" (click)="authservice.logoutUser()" style="cursor: pointer">Logout</a>
+          </div>
+        </div>
+  </div>
+</nav>

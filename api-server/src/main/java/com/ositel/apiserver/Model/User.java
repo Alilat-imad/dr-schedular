@@ -1,5 +1,6 @@
 package com.ositel.apiserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ositel.apiserver.model.audit.DateAudit;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,11 +39,11 @@ public class User extends DateAudit {
                 inverseJoinColumns = @JoinColumn(name = "role_id")
                 )
     private Set<Role> roles = new HashSet<>();
-
+/*
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "user")
-    private Medecin medecin;
+    private Medecin medecin;*/
 
     public User() {
     }

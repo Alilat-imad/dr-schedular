@@ -5,6 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Component
@@ -38,6 +40,18 @@ public class MailSenderImpl implements IMailSender {
         message.setFrom("alilat.imad@gmail.com");
         message.setSubject("New appointement added.");
         message.setText("Le patient "+ patientName+ " vient de prendre un rendez-vous pour le : "+date );
+        this.mailSender.send(message);
+    }
+
+    @Override
+    public void notifyPatient(boolean status ,String medecinFullName, String patientMail, LocalDate date, LocalTime timeStart, LocalTime timeEnd) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        var reponse = (status)? "confirmer" : "annuler";
+        message.setTo(patientMail);
+        message.setFrom("alilat.imad@gmail.com");
+        message.setSubject("Rendez-vous "+ reponse +" par Dr."+ medecinFullName);
+        message.setText("Le docteur. "+ medecinFullName+" a " + reponse +
+                " votre demande de rendez-vous pour le "+date+" de "+ timeStart+ " à "+timeEnd+".");
         this.mailSender.send(message);
     }
 }

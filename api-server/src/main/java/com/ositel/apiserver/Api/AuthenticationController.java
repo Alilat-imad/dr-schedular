@@ -118,15 +118,18 @@ public class AuthenticationController {
 
         user.setRoles(Collections.singleton(userRole));
 
-        Medecin medecin = new Medecin(signUpRequest.getFirstName(), signUpRequest.getLastName(),signUpRequest.getPhone(),
-                signUpRequest.getAddress(), user);
 
-        user.setMedecin(medecin);
+        Medecin medecin = new Medecin(
+                  signUpRequest.getFullName()
+                , signUpRequest.getPhone()
+                , signUpRequest.getAddress()
+                , user
+                );
+
+//        user.setMedecin(medecin);
 
         User result = userRepository.save(user);
         this.medecinRepository.save(medecin);
-
-
 
 
         URI location = ServletUriComponentsBuilder

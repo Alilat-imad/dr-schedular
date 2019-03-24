@@ -1,6 +1,7 @@
 package com.ositel.apiserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,16 +21,15 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Medecin {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Medecin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "full_name")
+    private String fullName;
     @Column(name = "phone_number")
     private String phone;
     @Column(name = "address")
@@ -37,21 +40,15 @@ public class Medecin {
             fetch = FetchType.LAZY,
             mappedBy = "medecin")
     @JsonIgnore
-    private Set<Appointement> appointements = new HashSet<>();
+    private List<Appointement> appointements = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", nullable=false)
+    @JsonIgnore
     private User user;
 
-    public Medecin(
-            String firstName
-            , String lastName
-            , String phone
-            , String address
-            , User user
-    ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Medecin(String fullName, String phone, @Size(max = 100) String address, User user) {
+        this.fullName = fullName;
         this.phone = phone;
         this.address = address;
         this.user = user;

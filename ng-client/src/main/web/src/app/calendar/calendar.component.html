@@ -1,0 +1,97 @@
+<div class="mobile-wrapper">
+
+   <!--======= Header =======-->
+
+   <!-- <header class="header">
+      <div class="container">
+         <span>Welcome Back!</span>
+         <h1>Doctor Name</h1>
+
+         <div class="menu-toggle">
+            <div>
+               <span></span>
+               <span></span>
+               <span></span>
+            </div>
+         </div>
+      </div>
+   </header> -->
+
+   <!--======= Today =======-->
+   <!-- <div class="alert alert-success" role="alert">
+       This is a success alert—check it out!
+   </div> 
+   <div class="alert alert-danger" role="alert">
+       This is a danger alert—check it out!
+   </div> -->
+   <section class="today-box" id="today-box">
+      <span class="breadcrumb">Vous avez [&nbsp;<b> {{ calendar.size }} </b> &nbsp;] rendez-vous.</span>
+      <h3 class="date-title"> 
+         {{this.calendarRequest.date}}
+         <!-- {{ this.calendar.date }} -->
+          <a (click)="previousDate(calendar.date)" style="cursor: pointer">
+                <i class="fas fa-chevron-circle-left"></i>
+          </a>
+          &nbsp;
+          <a (click)="nextDay(calendar.date)" style="cursor: pointer">
+                <i class="fas fa-chevron-circle-right"></i>
+          </a>
+
+      </h3>
+       
+      <div class="plus-icon">
+         <i class="fa fa-plus"></i>
+      </div>
+   </section>
+
+   <!--======= Upcoming Events =======-->
+
+   <section class="upcoming-events">
+      <div class="container">
+         <h3>
+            Total events
+         </h3>
+         <div class="events-wrapper">
+            <div class="event" *ngFor="let event of events">                                 
+                   <h4 class="event__point">{{event.timeStart}} - {{event.timeEnd}}</h4>
+                   <!-- <input type="text" class="new_event"> -->
+                   <!-- <select class="new_event">
+                         <option value="0">Selectionner un créno</option>
+                         <option value="1">11:00 - 12:00</option>
+                         <option value="2">11:00 - 12:00</option>
+                         <option value="3">11:00 - 12:00</option>
+                         <option value="4">11:00 - 12:00</option>
+                   </select> -->
+                   <a (click)="deleteEvent(event)">
+                         <span><i class="far fa-trash-alt"></i></span>
+                   </a>
+                   
+                      <div class="event__duration">
+                         
+                         <div class="checkbox switcher">
+                            <label [for]="event.appointmentId">
+                               <input 
+                                  type="checkbox"
+                                  [id]="event.appointmentId" 
+                                  [(ngModel)]="event.status"
+                                  value="event.status"
+                                  (change)="updateEventStatus(event)"
+                                  >
+                                  <span><small></small></span>
+                                  <span><b>{{(event.status)? 'Confirmer': 'Non confirmer'}}</b></span>
+                            </label>
+                            
+                         </div>
+                      </div>
+                   
+                   <p class="event__description">
+                      {{event.patientName}}
+                   </p>
+
+            </div>
+            
+         </div>
+
+      </div>
+   </section>
+</div>

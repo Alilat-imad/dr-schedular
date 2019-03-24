@@ -1,0 +1,67 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign In </h2>
+    <!-- <h2 class="inactive underlineHover">Sign Up </h2> -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <!-- <img src="https://cdn4.iconfinder.com/data/icons/doctor-icons/100/02-1Doctor-512.png" id="icon" alt="User Icon"  width="20" height="20" class="img-thumbnail"/> -->
+      <i class="fa fa-heartbeat" style="font-size:48px;color:rgb(86, 186, 237)"></i>
+    </div>
+
+    <!-- Login Form -->
+    <!-- <form> -->
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && signinUser()" novalidate class="feedback-form">
+      <input type="text"
+                    id="login"
+                    class="fadeIn third form-control"
+                    name="login"
+                    placeholder="Username / Email"
+                    [(ngModel)]="signinData.usernameOrEmail"
+                    #login="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && login.invalid }"
+                    required 
+                    minlength="3"/>
+            <!-- input validation group -->
+            <div *ngIf="f.submitted && login.invalid" class="invalid-input">
+              <!-- individual validation errors -->
+              <div *ngIf="login.errors?.required" style="color: red">Champ obligatoire</div>
+              <div *ngIf="login.errors?.minlength">Minimum 3 caractères</div>
+            </div>
+
+      <input type="password"
+                      id="password"
+                      class="fadeIn third form-control"
+                      name="password"
+                      placeholder="votre password"
+                      [(ngModel)]="signinData.password"
+                      #password="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                      required 
+                      minlength="5"/>
+                <!-- input validation group -->
+                <div *ngIf="f.submitted && password.invalid" class="invalid-input">
+                  <!-- individual validation errors -->
+                  <div *ngIf="password.errors?.required" style="color: red">Champ obligatoire</div>
+                  <div *ngIf="password.errors?.minlength">Minimum 5 caractères</div>
+                </div>
+
+
+      <div *ngIf="popupResult == false" class="alert alert-danger" role="alert">
+          {{popupMessage}}
+      </div>
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+    <!-- </form> -->
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <!-- <a class="underlineHover" href="#">Forgot Password?</a> -->
+      
+      <span class="underlineHover">Username : medecin  / Email : medecin@mail.com</span>
+      <span class="underlineHover">Password : medecin</span>
+    </div>
+
+  </div>
+</div>

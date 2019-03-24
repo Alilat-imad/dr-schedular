@@ -1,0 +1,20 @@
+.btn-sq-lg {
+    width: 250px !important;
+    height: 250px !important;
+    margin: 30%;
+  }
+
+  
+  .btn-squared-default
+  {
+      width: 180px !important;
+      height: 180px !important;
+      font-size: 17px;
+      margin: 50px;
+  }
+
+      .btn-squared-default:hover
+      {
+          border: 4px solid white;
+          font-weight: 600;
+      }

@@ -1,0 +1,50 @@
+# Add new appointment
+POST {{host-url}}/appointment/save
+Content-Type: application/json
+
+{
+    "name": "Amine"
+  , "email": "amine@gmail.com"
+  , "date" : "2019-01-10"
+  , "shiftTimeId": 3
+  , "medecinId": 2
+  , "isValide": false
+}
+###
+
+# validate an appointment
+POST {{host-url}}/appointment/activate
+Content-Type: application/json
+
+{
+  "appointmentId": 24
+, "status": false
+}
+###
+
+# delete appointment
+DELETE {{host-url}}/appointment/9
+###
+
+# Get appointment list by day.
+POST {{host-url}}/appointment/all
+Content-Type: application/json
+
+{
+  "medecinId": 11,
+  "date": "2019-03-24"
+}
+###
+
+
+# FEEDBACK
+
+POST {{host-url}}//mailing/feedback
+Content-Type: application/json
+
+{
+  "name": "Imad",
+  "email": "alilat.imad@gmail.com",
+  "feedback": "Your app is so cool"
+}
+###

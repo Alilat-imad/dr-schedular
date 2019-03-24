@@ -2,8 +2,6 @@ package com.ositel.apiserver.Api;
 
 import com.ositel.apiserver.Api.DtoViewModel.ApiResponse;
 import com.ositel.apiserver.Api.DtoViewModel.FeedbackRequest;
-import com.ositel.apiserver.Api.DtoViewModel.JwtAuthenticationResponse;
-import com.ositel.apiserver.Api.DtoViewModel.NotificationRequest;
 import com.ositel.apiserver.db.UserRepository;
 import com.ositel.apiserver.mail.IMailSender;
 import org.springframework.http.HttpStatus;
@@ -41,22 +39,4 @@ public class MailController {
                                 );
     }
 
-    @PostMapping("/notification")
-    public ResponseEntity<?> sendNotification(@RequestBody NotificationRequest notification, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Bad request."
-            );
-        }
-
-        if(!userRepository.existsByEmail(notification.getMedecinMail())){
-            return new ResponseEntity<>(new ApiResponse(false, "Email does not exist!"), HttpStatus.BAD_REQUEST);
-        }
-
-        this.mailSender.sendNotification(notification.getMedecinMail(), notification.getPatientName(), notification.getAppointement());
-        return ResponseEntity.ok(
-                new ApiResponse(true, "Notification mail successfully sent.")
-                                );
-
-    }
 }
