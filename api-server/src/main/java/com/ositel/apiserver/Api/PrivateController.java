@@ -55,8 +55,10 @@ public class PrivateController {
         if (bindingResult.hasErrors()){
             throw new ValidationException("Appointment has errors; Can not update the status of the appointment;");
         }
+        var date = LocalDate.parse(todayAppointment.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         var response = this.medecinService.AllMedecinAvailability(currentUser, todayAppointment);
-
+        if(response==null)
+            return ResponseEntity.ok(new TodayAppointmentResponse(date, 0, null));
         return ResponseEntity.ok(response);
 
     }

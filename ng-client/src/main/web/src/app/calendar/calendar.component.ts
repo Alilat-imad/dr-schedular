@@ -29,19 +29,22 @@ export class CalendarComponent implements OnInit {
     this.getAppointment();
   }
 
-  nextDay() {
-    let dt = new Date(this.calendar.date);
+
+  previousDate(value: string) {
+    let dt = new Date(value);
+    dt.setDate( dt.getDate() - 1 );
+    this.calendarRequest.date = dt.toISOString().slice(0, 10);
+    this.calendar.date = this.calendarRequest.date;
+    this.getAppointment();
+  }
+  nextDay(value: string) {
+    let dt = new Date(value);
     dt.setDate( dt.getDate() + 1 );
     this.calendarRequest.date = dt.toISOString().slice(0, 10);
+    this.calendar.date = this.calendarRequest.date;
     this.getAppointment();
   }
 
-  previousDate() {
-    let dt = new Date(this.calendar.date);
-    dt.setDate( dt.getDate() - 1 );
-    this.calendarRequest.date = dt.toISOString().slice(0, 10);
-    this.getAppointment();
-  }
 
   getAppointment() {
     this.privateService.calendarEvent(this.calendarRequest)
@@ -49,7 +52,7 @@ export class CalendarComponent implements OnInit {
       res => {
         this.calendar = res;
         this.events = res.events;
-        console.log('Success =>' + res);
+        console.log('Success =>' + res.body);
       },
       err => {
         if (err instanceof HttpErrorResponse) {

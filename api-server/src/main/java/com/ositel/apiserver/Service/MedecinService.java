@@ -60,7 +60,7 @@ public class MedecinService {
         if(isAvailable.isEmpty()){
 //            return new ResponseEntity<>(new ApiResponse(false,"No event for today."),
 //                    HttpStatus.NOT_FOUND);
-            return ResponseEntity.ok(new TodayAppointmentResponse(date, 0,null));
+            return null;
         }
         int size = isAvailable.size();
         var response = this.appointementMapper.toDto(isAvailable, isAvailable.get(0), size);

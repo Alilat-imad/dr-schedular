@@ -2,38 +2,16 @@
 
    <!--======= Header =======-->
 
-   <!-- <header class="header">
-      <div class="container">
-         <span>Welcome Back!</span>
-         <h1>Doctor Name</h1>
-
-         <div class="menu-toggle">
-            <div>
-               <span></span>
-               <span></span>
-               <span></span>
-            </div>
-         </div>
-      </div>
-   </header> -->
-
-   <!--======= Today =======-->
-   <!-- <div class="alert alert-success" role="alert">
-       This is a success alert—check it out!
-   </div> 
-   <div class="alert alert-danger" role="alert">
-       This is a danger alert—check it out!
-   </div> -->
    <section class="today-box" id="today-box">
       <span class="breadcrumb">Vous avez [&nbsp;<b> {{ calendar.size }} </b> &nbsp;] rendez-vous.</span>
       <h3 class="date-title"> 
          {{this.calendarRequest.date}}
          <!-- {{ this.calendar.date }} -->
-          <a (click)="previousDate(calendar.date)" style="cursor: pointer">
+          <a (click)="previousDate(this.calendarRequest.date)" style="cursor: pointer">
                 <i class="fas fa-chevron-circle-left"></i>
           </a>
           &nbsp;
-          <a (click)="nextDay(calendar.date)" style="cursor: pointer">
+          <a (click)="nextDay(this.calendarRequest.date)" style="cursor: pointer">
                 <i class="fas fa-chevron-circle-right"></i>
           </a>
 
