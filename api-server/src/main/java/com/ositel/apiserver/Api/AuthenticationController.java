@@ -1,9 +1,9 @@
 package com.ositel.apiserver.Api;
 
-import com.ositel.apiserver.Api.DtoViewModel.ApiResponse;
-import com.ositel.apiserver.Api.DtoViewModel.JwtAuthenticationResponse;
-import com.ositel.apiserver.Api.DtoViewModel.SignInRequest;
-import com.ositel.apiserver.Api.DtoViewModel.SignUpRequest;
+import com.ositel.apiserver.Api.DtoViewModel.Response.ApiResponse;
+import com.ositel.apiserver.Api.DtoViewModel.Response.JwtAuthenticationResponse;
+import com.ositel.apiserver.Api.DtoViewModel.Request.SignInRequest;
+import com.ositel.apiserver.Api.DtoViewModel.Request.SignUpRequest;
 import com.ositel.apiserver.db.MedecinRepository;
 import com.ositel.apiserver.db.RoleRepository;
 import com.ositel.apiserver.db.UserRepository;
@@ -83,36 +83,6 @@ public class AuthenticationController {
                         , signUpRequest.getPassword()
                         );
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-
-        // Setting up roles.
-//        Set<String> setRoles = signUpRequest.getRoles();
-//        Set<Role> userRoles = new HashSet<>();
-//        setRoles.forEach(role -> {
-//            switch (role){
-//                case "admin":
-//                    Role role1 = this.roleRepository.findByName(RoleName.ROLE_ADMIN)
-//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Admin Role not find."));
-//                    userRoles.add(role1);
-//                    break;
-//
-//                case "pm":
-//                    Role role2 = this.roleRepository.findByName(RoleName.ROLE_PM)
-//                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: PM Role not find."));
-//                    userRoles.add(role2);
-//                    break;
-//                default:
-////                    Role role3 = this.roleRepository.findByName(RoleName.ROLE_USER)
-////                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-////                    userRoles.add(role3);
-//                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-//                            .orElseThrow(() -> new AppException("User Role not set."));
-//
-//                    user.setRoles(Collections.singleton(userRole));
-//                    break;
-//            }
-//        });
-//        user.setRoles(userRoles);
-
         Role userRole = roleRepository.findByName(RoleName.ROLE_MEDECIN)
                 .orElseThrow(() -> new AppException("Medecin Role not set."));
 
@@ -125,8 +95,6 @@ public class AuthenticationController {
                 , signUpRequest.getAddress()
                 , user
                 );
-
-//        user.setMedecin(medecin);
 
         User result = userRepository.save(user);
         this.medecinRepository.save(medecin);

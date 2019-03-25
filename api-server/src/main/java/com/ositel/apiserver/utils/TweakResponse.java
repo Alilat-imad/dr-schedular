@@ -1,6 +1,6 @@
 package com.ositel.apiserver.utils;
 
-import com.ositel.apiserver.Api.DtoViewModel.AvailabilityMedecinResponse;
+import com.ositel.apiserver.Api.DtoViewModel.Response.AvailabilityMedecinResponse;
 import com.ositel.apiserver.db.ShiftHoraireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

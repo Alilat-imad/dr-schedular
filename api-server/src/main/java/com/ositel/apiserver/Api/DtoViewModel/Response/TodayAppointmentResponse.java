@@ -1,11 +1,10 @@
-package com.ositel.apiserver.Api.DtoViewModel;
+package com.ositel.apiserver.Api.DtoViewModel.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 

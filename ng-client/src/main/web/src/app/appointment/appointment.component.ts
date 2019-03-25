@@ -88,6 +88,8 @@ export class AppointmentComponent implements OnInit {
     this.publicService.appointment(this.availabilityData)
     .subscribe(
       res => {
+        alert("Evenement créer avec succès.");
+        location.reload();
         this.popupResult = true;
         this.popupMessage = 'Evenement créer avec succès.';
           },

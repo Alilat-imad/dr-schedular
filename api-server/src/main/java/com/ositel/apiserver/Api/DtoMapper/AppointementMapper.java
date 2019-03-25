@@ -1,17 +1,14 @@
 package com.ositel.apiserver.Api.DtoMapper;
 
-import com.ositel.apiserver.Api.DtoViewModel.AvailabilityMedecinResponse;
-import com.ositel.apiserver.Api.DtoViewModel.TodayAppointmentListDto;
-import com.ositel.apiserver.Api.DtoViewModel.TodayAppointmentResponse;
+import com.ositel.apiserver.Api.DtoViewModel.Response.AvailabilityMedecinResponse;
+import com.ositel.apiserver.Api.DtoViewModel.Response.TodayAppointmentListDto;
+import com.ositel.apiserver.Api.DtoViewModel.Response.TodayAppointmentResponse;
 import com.ositel.apiserver.db.AppointementRepository;
 import com.ositel.apiserver.db.MedecinRepository;
 import com.ositel.apiserver.model.Appointement;
-import com.ositel.apiserver.model.ShiftHoraire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.Element;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

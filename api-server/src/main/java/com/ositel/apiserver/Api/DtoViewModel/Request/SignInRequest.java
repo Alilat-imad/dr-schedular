@@ -1,4 +1,4 @@
-package com.ositel.apiserver.Api.DtoViewModel;
+package com.ositel.apiserver.Api.DtoViewModel.Request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

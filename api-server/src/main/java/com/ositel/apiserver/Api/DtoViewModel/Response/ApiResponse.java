@@ -1,4 +1,4 @@
-package com.ositel.apiserver.Api.DtoViewModel;
+package com.ositel.apiserver.Api.DtoViewModel.Response;
 
 public class ApiResponse {
     private Boolean success;

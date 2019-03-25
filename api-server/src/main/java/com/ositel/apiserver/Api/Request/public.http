@@ -1,4 +1,4 @@
-# Add new appointment
+# Public : Add new appointment
 POST {{host-url}}/appointment/save
 Content-Type: application/json
 
@@ -7,37 +7,13 @@ Content-Type: application/json
   , "email": "amine@gmail.com"
   , "date" : "2019-01-10"
   , "shiftTimeId": 3
-  , "medecinId": 2
+  , "medecinId": 27
   , "isValide": false
 }
 ###
 
-# validate an appointment
-POST {{host-url}}/appointment/activate
-Content-Type: application/json
 
-{
-  "appointmentId": 24
-, "status": false
-}
-###
-
-# delete appointment
-DELETE {{host-url}}/appointment/9
-###
-
-# Get appointment list by day.
-POST {{host-url}}/appointment/all
-Content-Type: application/json
-
-{
-  "medecinId": 11,
-  "date": "2019-03-24"
-}
-###
-
-
-# FEEDBACK
+# Public :  Send FEEDBACK
 
 POST {{host-url}}//mailing/feedback
 Content-Type: application/json
@@ -49,11 +25,13 @@ Content-Type: application/json
 }
 ###
 
+# Public :  Get list of all medecin
+
 GET {{host-url}}//appointment/medecin
 
 ###
 
-# Get Public appointment list by day.
+# Public :  Get Public appointment list by day.
 POST {{host-url}}/appointment/availability
 Content-Type: application/json
 

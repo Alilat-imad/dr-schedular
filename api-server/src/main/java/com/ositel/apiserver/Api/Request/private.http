@@ -1,0 +1,22 @@
+## Remarque : il faut désactiver la sécuriter pour pouvoir tester ces EndPoints.
+
+# private : Change Status of an appointement
+POST {{host-url}}/appointment/status/1
+Content-Type: application/json
+
+{}
+###
+
+# private : delete appointment
+DELETE {{host-url}}/appointment/1
+###
+
+# private : Get appointment list by day.
+POST {{host-url}}/appointment/all
+Content-Type: application/json
+
+{
+  "medecinId": 11,
+  "date": "2019-03-24"
+}
+###

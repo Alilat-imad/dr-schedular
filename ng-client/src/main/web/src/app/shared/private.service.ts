@@ -9,11 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class PrivateService {
 
-  private BASE_URL = 'http://localhost:8080/api';
-  private CALENDAR_EVENTS_URL = `${this.BASE_URL}\\appointment\\all`;
-  private DELETE_EVENT_URL = `${this.BASE_URL}/appointment/`;
-  private CHANGE_EVENT_STATUS_URL = `${this.BASE_URL}/appointment/status/`;
-
+  private BASE_URL = 'http://localhost:8080/api/private';
+  private CALENDAR_EVENTS_URL = `${this.BASE_URL}\\events\\daily`;
+  private DELETE_EVENT_URL = `${this.BASE_URL}/events/`;
+  private CHANGE_EVENT_STATUS_URL = `${this.BASE_URL}/events/status/`;
 
   constructor(private http: HttpClient, private router: Router) { }
 

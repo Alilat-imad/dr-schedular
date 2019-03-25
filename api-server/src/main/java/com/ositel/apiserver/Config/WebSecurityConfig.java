@@ -88,19 +88,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             .permitAll()
                     .antMatchers("/api/public/**")
                             .permitAll()
-                    .antMatchers("/api/public")
+                .antMatchers("/api/public/appointment/save")
+                .permitAll()
+                .antMatchers("/api/public/medecin")
+                .permitAll()
+                .antMatchers("/api/public/availability")
+                .permitAll()
+                    .antMatchers("/api/mailing/feedback")
                             .permitAll()
-                    .antMatchers("/api/appointment/**")
-                            .permitAll()
-                    .antMatchers("/api/mailing/**")
-                            .permitAll()
-
-                .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
-                            .permitAll()
-                    .antMatchers(HttpMethod.GET, "/api/medecin/**", "/api/users/**")
-                            .permitAll();
-//                    .anyRequest()
-//                .authenticated();
+                    .anyRequest()
+                            .authenticated();
 
 
         // Add our custom JWT security filter

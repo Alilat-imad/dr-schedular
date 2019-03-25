@@ -13,9 +13,9 @@ export class PublicService {
 
   private BASE_URL = 'http://localhost:8080/api';
   private FEEDBACK_URL = `${this.BASE_URL}\\mailing\\feedback`;
-  private APPOINTMENT_URL = `${this.BASE_URL}\\appointment\\save`;
-  private MEDECIN_LIST_URL = `${this.BASE_URL}\\appointment\\medecin`;
-  private AVAILABILITY_LIST_URL = `${this.BASE_URL}\\appointment\\availability`;
+  private APPOINTMENT_URL = `${this.BASE_URL}\\public\\appointment\\save`;
+  private MEDECIN_LIST_URL = `${this.BASE_URL}\\public\\medecin`;
+  private AVAILABILITY_LIST_URL = `${this.BASE_URL}\\public\\availability`;
 
   constructor(private http: HttpClient, private router: Router) { }
 

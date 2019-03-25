@@ -1,7 +1,7 @@
 package com.ositel.apiserver.Api;
 
-import com.ositel.apiserver.Api.DtoViewModel.ApiResponse;
-import com.ositel.apiserver.Api.DtoViewModel.FeedbackRequest;
+import com.ositel.apiserver.Api.DtoViewModel.Response.ApiResponse;
+import com.ositel.apiserver.Api.DtoViewModel.Request.FeedbackRequest;
 import com.ositel.apiserver.db.UserRepository;
 import com.ositel.apiserver.mail.IMailSender;
 import org.springframework.http.HttpStatus;
