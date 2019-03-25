@@ -48,3 +48,17 @@ Content-Type: application/json
   "feedback": "Your app is so cool"
 }
 ###
+
+GET {{host-url}}//appointment/medecin
+
+###
+
+# Get Public appointment list by day.
+POST {{host-url}}/appointment/availability
+Content-Type: application/json
+
+{
+  "medecinId": 24,
+  "date": "2019-03-25"
+}
+###

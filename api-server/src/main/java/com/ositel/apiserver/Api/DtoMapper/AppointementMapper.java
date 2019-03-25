@@ -1,10 +1,12 @@
 package com.ositel.apiserver.Api.DtoMapper;
 
+import com.ositel.apiserver.Api.DtoViewModel.AvailabilityMedecinResponse;
 import com.ositel.apiserver.Api.DtoViewModel.TodayAppointmentListDto;
 import com.ositel.apiserver.Api.DtoViewModel.TodayAppointmentResponse;
 import com.ositel.apiserver.db.AppointementRepository;
 import com.ositel.apiserver.db.MedecinRepository;
 import com.ositel.apiserver.model.Appointement;
+import com.ositel.apiserver.model.ShiftHoraire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,5 +56,16 @@ public class AppointementMapper {
         todayAppointmentListDto.setTimeEnd(appointement.getShiftHoraire().getTimeEnd());
         return todayAppointmentListDto;
     }
+
+
+    public AvailabilityMedecinResponse toAvailabilityMedecinDto(Appointement appointement){
+        var availabilityMedecin = new AvailabilityMedecinResponse();
+                availabilityMedecin.setId(appointement.getShiftHoraire().getId());
+                availabilityMedecin.setShiftHoraire(appointement.getShiftHoraire().getTimeStart() +" - "+appointement.getShiftHoraire().getTimeEnd());
+                availabilityMedecin.setAvailable(false);
+        return availabilityMedecin;
+    }
+
+
 
 }

@@ -12,6 +12,7 @@ import com.ositel.apiserver.model.Appointement;
 import com.ositel.apiserver.model.Patient;
 import com.ositel.apiserver.security.CurrentUser;
 import com.ositel.apiserver.security.UserPrincipal;
+import com.ositel.apiserver.utils.TweakResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,24 +40,18 @@ public class AppointementController {
     private AppointementRepository appointementRepository;
     private IMailSender mailSender;
     private AppointementMapper appointementMapper;
+    private TweakResponse tweakResponse;
 
     @Autowired
-    public AppointementController(
-            MedecinRepository medecinRepository
-            , PatientRepository patientRepository
-            , ShiftHoraireRepository shiftHoraireRepository
-            , AppointementRepository appointementRepository
-            , IMailSender mailSender
-            , AppointementMapper appointementMapper
-    ) {
+    public AppointementController(MedecinRepository medecinRepository, PatientRepository patientRepository, ShiftHoraireRepository shiftHoraireRepository, AppointementRepository appointementRepository, IMailSender mailSender, AppointementMapper appointementMapper, TweakResponse tweakResponse) {
         this.medecinRepository = medecinRepository;
         this.patientRepository = patientRepository;
         this.shiftHoraireRepository = shiftHoraireRepository;
         this.appointementRepository = appointementRepository;
         this.mailSender = mailSender;
         this.appointementMapper = appointementMapper;
+        this.tweakResponse = tweakResponse;
     }
-
 
     //  Add new appointement;
     @PostMapping("/save")
@@ -156,6 +152,43 @@ public class AppointementController {
         var response = this.appointementMapper.toDto(isAvailable, isAvailable.get(0), size);
         return ResponseEntity.ok(response);
 
+    }
+
+
+
+    @GetMapping("/medecin")
+    public ResponseEntity<? extends Object> listMedecin(){
+        var ListMedecin = this.medecinRepository.findAll();
+        return ResponseEntity.ok(ListMedecin);
+    }
+
+
+    @PostMapping("/availability")
+    public ResponseEntity<? extends Object> listMedecinAvailability(@Valid @RequestBody MedecinAvailabilityRequest medecinAvailability, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new ValidationException("Availabilities has errors; Can not fetch all medecin availabilities;");
+        }
+        var medecin = this.medecinRepository.findById(medecinAvailability.getMedecinId());
+        var date = LocalDate.parse(medecinAvailability.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if(medecin.isEmpty()){
+            return new ResponseEntity<>(new ApiResponse(false,"Medecin not found.."),
+                    HttpStatus.NOT_FOUND);
+        }
+        var medecinAvailabilities = this.appointementRepository.findAllByMedecinAndDate(medecin.get(), date);
+
+        var medecinAvailabilityList =
+                medecinAvailabilities.stream().sorted((a1, a2) -> {
+                                            System.out.printf("sort: %s; %s\n", a1, a2);
+                                            return a1.getShiftHoraire().getId().compareTo(a2.getShiftHoraire().getId());
+                                                                    })
+                        .map(a -> this.appointementMapper.toAvailabilityMedecinDto(a))
+                        .collect(Collectors.toList());
+
+        var result = this.tweakResponse.listAllAvailiblityByStatus(medecinAvailabilityList);
+
+
+
+        return ResponseEntity.ok(result);
     }
 
 }

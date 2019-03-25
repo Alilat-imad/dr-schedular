@@ -4,6 +4,7 @@ import { Calendar } from './model/calendar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { getLocaleDateFormat } from '@angular/common';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-calendar',
@@ -20,7 +21,7 @@ export class CalendarComponent implements OnInit {
   calendar: Calendar = {date: '', size: 0, events: []};
   events: Event[] = [];
 
-  constructor(private privateService: PrivateService, private router: Router) { }
+  constructor(private privateService: PrivateService, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
     // On init get today Date.
@@ -53,9 +54,9 @@ export class CalendarComponent implements OnInit {
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401 || err.status === 500) {
-              this.router.navigate(['/login']);
-          }
-          else if (err.status === 404) {
+
+            this.authService.logoutUser();
+          } else if (err.status === 404) {
             location.reload();
           }
         }
@@ -71,7 +72,6 @@ export class CalendarComponent implements OnInit {
           let indexOfEvent = this.events.indexOf(event);
           this.events.splice(indexOfEvent, 1 );
           this.calendar.size--;
-
         },
         err => {
           alert('Could not delete Event');
@@ -95,10 +95,10 @@ export class CalendarComponent implements OnInit {
     if (confirm('Vous allez ' + status + ' le rendez-vous | Mr.' + event.patientName  + ' sera notifer par email. ')) {
       this.privateService.changeEventStatus(event.appointmentId).subscribe(
         res => {
-          location.reload();
+
         },
         err => {
-              alert('Une erreur s\'est produite lors de la mise à jour de l\'événement.'); 
+              alert('Une erreur s\'est produite lors de la mise à jour de l\'événement.');
               if (err instanceof HttpErrorResponse) {
                 if (err.status === 401 || err.status === 500) {
                     this.router.navigate(['/login']);

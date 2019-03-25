@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Register } from './model/register';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Local } from 'protractor/built/driverProviders';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +40,7 @@ export class RegisterComponent implements OnInit {
               this.popupMessage = 'Erreur lors de l\'enregistrement, veuillez réessayer.';
             }
           }
-          
+
         }
       )
   }
