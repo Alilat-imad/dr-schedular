@@ -59,10 +59,10 @@ MIT
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [screenshot1]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot1.png>
-   [screenshot2]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot2.png>
-   [screenshot3]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot3.png>
-   [screenshot4]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot4.png>
-   [screenshot5]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot5.png>
-   [screenshot6]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot6.png>
+   [screenshot1]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot1.jpg>
+   [screenshot2]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot2.jpg>
+   [screenshot3]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot3.jpg>
+   [screenshot4]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot4.jpg>
+   [screenshot5]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot5.jpg>
+   [screenshot6]: <https://github.com/Alilat-imad/dr-schedular/screenshots/screenshot6.jpg>
    
