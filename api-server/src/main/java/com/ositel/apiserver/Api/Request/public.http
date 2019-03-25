@@ -1,5 +1,5 @@
 # Public : Add new appointment
-POST {{host-url}}/appointment/save
+POST {{host-url}}/public/appointment/save
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
   , "email": "amine@gmail.com"
   , "date" : "2019-01-10"
   , "shiftTimeId": 3
-  , "medecinId": 27
+  , "medecinId": 1
   , "isValide": false
 }
 ###
@@ -27,16 +27,16 @@ Content-Type: application/json
 
 # Public :  Get list of all medecin
 
-GET {{host-url}}//appointment/medecin
+GET {{host-url}}//public/medecin
 
 ###
 
 # Public :  Get Public appointment list by day.
-POST {{host-url}}/appointment/availability
+POST {{host-url}}/public/availability
 Content-Type: application/json
 
 {
-  "medecinId": 24,
+  "medecinId": 1,
   "date": "2019-03-25"
 }
 ###

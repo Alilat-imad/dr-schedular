@@ -1,22 +1,22 @@
 ## Remarque : il faut désactiver la sécuriter pour pouvoir tester ces EndPoints.
 
 # private : Change Status of an appointement
-POST {{host-url}}/appointment/status/1
+POST {{host-url}}//private/events/status/52
 Content-Type: application/json
 
 {}
 ###
 
 # private : delete appointment
-DELETE {{host-url}}/appointment/1
+DELETE {{host-url}}//private/events/51
 ###
 
 # private : Get appointment list by day.
-POST {{host-url}}/appointment/all
+POST {{host-url}}//private/events/daily
 Content-Type: application/json
 
 {
-  "medecinId": 11,
-  "date": "2019-03-24"
+  "medecinId": 1,
+  "date": "2019-03-26"
 }
 ###

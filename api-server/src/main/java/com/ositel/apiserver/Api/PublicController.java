@@ -4,6 +4,7 @@ import com.ositel.apiserver.Api.DtoMapper.AppointementMapper;
 import com.ositel.apiserver.Api.DtoViewModel.Request.MedecinAvailabilityRequest;
 import com.ositel.apiserver.Api.DtoViewModel.Request.NewAppointmentRequest;
 import com.ositel.apiserver.Api.DtoViewModel.Response.ApiResponse;
+import com.ositel.apiserver.Service.PublicService;
 import com.ositel.apiserver.db.AppointementRepository;
 import com.ositel.apiserver.db.MedecinRepository;
 import com.ositel.apiserver.db.PatientRepository;
@@ -30,7 +31,8 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class PublicController {
 
-
+    @Autowired
+    private PublicService publicService;
     private MedecinRepository medecinRepository;
     private PatientRepository patientRepository;
     private ShiftHoraireRepository shiftHoraireRepository;
@@ -57,68 +59,29 @@ public class PublicController {
             throw new ValidationException("Appointment has errors; Can not save the appointment;");
         }
 
-        var medecin = this.medecinRepository.findById(newAppointment.getMedecinId());
-        var shiftHoraire = this.shiftHoraireRepository.findById(newAppointment.getShiftTimeId());
-        var date = LocalDate.parse(newAppointment.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        if(medecin.isEmpty()){
-            return new ResponseEntity<>(new ApiResponse(false,"Medecin non trouvé."),
-                    HttpStatus.NOT_FOUND);
-        }
-        if(shiftHoraire.isEmpty()){
-            return new ResponseEntity<>(new ApiResponse(false,"Time shift does not exist, please try again."),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        var isAvailable = this.appointementRepository.findByMedecinAndDateAndShiftHoraire(medecin.get(), date, shiftHoraire.get());
-        // Check if not already take.
-        if(isAvailable.isPresent()){
-            return new ResponseEntity<>(new ApiResponse(false,"Time shift already taken, please choose another one."),
-                    HttpStatus.BAD_REQUEST);
-        }
-        var patientName = newAppointment.getName();
-        var patientEmail = newAppointment.getEmail();
-
-        // Finally perform the save operation
-        Patient patient = new Patient(patientName, patientEmail);
-        Patient savedPatient = this.patientRepository.save(patient);
-        Appointement appointement = new Appointement(medecin.get(), savedPatient,shiftHoraire.get(), date, false);
-        this.appointementRepository.save(appointement);
-        return ResponseEntity.ok(appointement);
+        var saveAppointement = this.publicService.save(newAppointment);
+        return ResponseEntity.ok(saveAppointement);
 
     }
 
-    // List all available Medecin
+    // EndPoint : List all available Medecin
     @GetMapping("/medecin")
     public ResponseEntity<? extends Object> listMedecin(){
-        var ListMedecin = this.medecinRepository.findAll();
+        var ListMedecin = this.publicService.listAllMedecin();
         return ResponseEntity.ok(ListMedecin);
     }
 
-    // Get list of availability of a doctor by day.
+    // End Point : Get list of availability of a doctor by day.
     @PostMapping("/availability")
     public ResponseEntity<? extends Object> listMedecinAvailability(@Valid @RequestBody MedecinAvailabilityRequest medecinAvailability, BindingResult bindingResult){
-
         if(bindingResult.hasErrors()){
             throw new ValidationException("Availabilities has errors; Can not fetch all medecin availabilities;");
         }
+        var result = this.publicService.listAllMedecinAvailability(medecinAvailability);
 
-        var medecin = this.medecinRepository.findById(medecinAvailability.getMedecinId());
-        var date = LocalDate.parse(medecinAvailability.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        if(medecin.isEmpty()){
+        if(result==null)
             return new ResponseEntity<>(new ApiResponse(false,"Medecin not found.."),
                     HttpStatus.NOT_FOUND);
-        }
-        var medecinAvailabilities = this.appointementRepository.findAllByMedecinAndDate(medecin.get(), date);
-
-        var medecinAvailabilityList =
-                medecinAvailabilities.stream().sorted((a1, a2) -> {
-                    System.out.printf("sort: %s; %s\n", a1, a2);
-                    return a1.getShiftHoraire().getId().compareTo(a2.getShiftHoraire().getId());
-                })
-                        .map(a -> this.appointementMapper.toAvailabilityMedecinDto(a))
-                        .collect(Collectors.toList());
-
-        var result = this.tweakResponse.listAllAvailiblityByStatus(medecinAvailabilityList);
 
         return ResponseEntity.ok(result);
     }
