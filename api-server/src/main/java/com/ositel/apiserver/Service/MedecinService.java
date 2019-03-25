@@ -49,8 +49,8 @@ public class MedecinService {
     }
 
     // Display List of daily events of a doctor (Private cause it hold private patient data )
-    public Object AllMedecinAvailability(@RequestBody TodayAppointmentRequest todayAppointment){
-        var medecin = this.medecinRepository.findById(todayAppointment.getMedecinId());
+    public Object AllMedecinAvailability(UserPrincipal currentUser, @RequestBody TodayAppointmentRequest todayAppointment){
+        var medecin = this.medecinRepository.findById(currentUser.getId());
         var date = LocalDate.parse(todayAppointment.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         if(medecin.isEmpty()){
             return new ResponseEntity<>(new ApiResponse(false,"Medecin not found."),

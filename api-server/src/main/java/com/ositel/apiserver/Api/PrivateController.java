@@ -51,16 +51,15 @@ public class PrivateController {
     // Display List of daily events of a doctor (Private cause it hold private patient data )
     @PreAuthorize("hasRole('MEDECIN')")
     @PostMapping("events/daily")
-    public ResponseEntity<? extends Object> today(@Valid @RequestBody TodayAppointmentRequest todayAppointment, BindingResult bindingResult){
+    public ResponseEntity<? extends Object> today(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody TodayAppointmentRequest todayAppointment, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             throw new ValidationException("Appointment has errors; Can not update the status of the appointment;");
         }
-        var response = this.medecinService.AllMedecinAvailability( todayAppointment);
+        var response = this.medecinService.AllMedecinAvailability(currentUser, todayAppointment);
 
         return ResponseEntity.ok(response);
 
     }
-
 
     // Delete an appointment
     @PreAuthorize("hasRole('MEDECIN')")
