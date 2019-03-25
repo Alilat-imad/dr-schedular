@@ -30,8 +30,12 @@ Dr Schedular est une application (REST) sécurité pour de prise de rendez-vous 
 
 # Envirement de developpement 
 
-  - Dans le fichier application.properties, modifier : spring.datasource.username & spring.datasource.password=admin avec vos accès de bdd et assurez vous que la BDD est lancé.
-  - Inscrivez vous sur mailtrap.io et modifier les parametres la section SMTP pour recevoir des notification par mail (Feedback, changement de status)
+  - Apache Maven 3.6.0.
+  - npm 6.4.1
+  - node v10.15.0
+  - Spring boot 2.1.0
+  - Java 11
+  - MySQL DB
 
 ### Lancer l'application
 
@@ -41,26 +45,9 @@ $ mvn clean install
 ```
 Pour exécuter l'application Spring Boot à l'aide de Maven, exécutez la commande suivante à partir du répertoire api-server.
 ```sh
-$ mvn spring-boot: lancer
+$ mvn spring-boot:run
 ```
-Une fois l'application lancée, nous devrions pouvoir voir la page d'accueil avec http: // localhost: 8080 /.
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
-
-For production environments...
-
-```sh
-$ npm install --production
-$ NODE_ENV=production node app
-```
+Une fois l'application lancée, nous devrions pouvoir voir la page d'accueil avec http://localhost:8080/
 
 License
 ----
