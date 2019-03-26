@@ -17,7 +17,7 @@
                     <!-- Patient Name -->
                     <div class="col-md-6">
                         <div class="form-group">
-                                <label class="control-label" for="email">Email patient</label>
+                                <label class="control-label" for="email">Nom patient</label>
                                 <!-- Full name -->
                                 <input type="text" 
                                             id="name" 
@@ -27,6 +27,7 @@
                                             [(ngModel)]="availabilityData.name" 
                                             #name="ngModel"
                                             [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
+                                            minlength="5"
                                             required>
     
                                             <!-- input validation group -->
@@ -34,6 +35,7 @@
                                             <div *ngIf="f.submitted && name.invalid" class="invalid-input">
                                                 <!-- individual validation errors -->
                                                 <!-- <div *ngIf="name.errors?.required" style="color: red">Champ obligatoire</div> -->
+                                                <div *ngIf="name.errors?.minlength" class="text-danger">Minimum 5 caractères</div>
                                                 <small  *ngIf="name.errors?.required" class="text-danger">Champ obligatoire</small>
                                             </div>
     
